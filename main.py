@@ -44,8 +44,8 @@ def main():
     conf = config.readConfig(config_filename)
     message = mail.Email(conf)
     exchange = rate.Exchange(conf)
-    #getPrice(conf, exchange, message)
-    #if message.length > 0: message.send()
+    getPrice(conf, exchange, message)
+    if message.length > 0: message.send()
     logMessage(lofile_filename, 'sent')
 
 main()
