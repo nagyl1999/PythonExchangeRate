@@ -15,7 +15,6 @@ def getPrice(conf, exchange, message):
     coins = conf.get('coins').get('coins')
     for coin in coins:
         rate = exchange.get_coin(coin)
-        print(rate)
         if rate >= coins[coin]:
             message.add(coin, rate)
 
