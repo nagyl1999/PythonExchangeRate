@@ -10,12 +10,12 @@ import modulok.config as config
 ''' statikus adatok '''
 config_filename = 'config.conf'
 
-def getPrice(conf, message):
+def getPrice(conf, exchange, message):
     ''' Árfolyam lekérése és összehasonlítás '''
-    x = rate.Exchange(conf)
     coins = conf.get('coins').get('coins')
     for coin in coins:
-        rate = x.get_coin(coin)
+        rate = exchange.get_coin(coin)
+        print(rate)
         if rate >= coins[coin]:
             message.add(coin, rate)
 
@@ -23,7 +23,8 @@ def main():
     ''' Főprogramrész '''
     conf = config.readConfig(config_filename)
     message = mail.Email(conf)
-    getPrice(conf, message)
+    exchange = rate.Exchange(conf)
+    getPrice(conf, exchange, message)
     if message.length > 0: message.send()
 
 main()
