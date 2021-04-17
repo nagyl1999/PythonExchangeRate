@@ -37,4 +37,4 @@ class Email(MIMEMultipart):
             self.server.sendmail(self["From"], self["To"], self.as_string())
             self.server.quit()
         except Exception as e:
-            pass
+            sys.exit()
