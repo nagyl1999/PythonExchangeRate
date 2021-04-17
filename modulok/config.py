@@ -1,5 +1,6 @@
 ''' globális importok '''
 import sys
+import json
 import configparser
 
 class Datas(list):
@@ -19,7 +20,9 @@ class Data(dict):
 
     def add(self, key, value):
         ''' Kulcs - érték hozzáadása, típusválogatás '''
-        if ',' in value:
+        if value.startswith('{'):
+            self[key] = json.loads(value.replace('\n', ''))
+        elif ',' in value:
             self[key] = [elem.strip() for elem in value.split(',')]
         elif value.isdigit():
             self[key] = float(value) if round(float(value)) - float(value) != 0 else int(value)
